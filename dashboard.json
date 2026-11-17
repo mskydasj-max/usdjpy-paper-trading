@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-11-17T13:16:30.821164+00:00",
-  "last_processed_bar": "2026-11-17T12:00:00+00:00",
+  "updated_at": "2026-11-17T23:17:35.227927+00:00",
+  "last_processed_bar": "2026-11-17T22:00:00+00:00",
   "cash_jpy": 100000.0,
   "realized_pnl_jpy": 0.0,
   "position": null,
   "trades": [],
   "trade_count": 0,
   "halted": false,
-  "latest_price": 159.272,
-  "ma50": 159.5551,
-  "ma200": 158.9079,
+  "latest_price": 159.405,
+  "ma50": 159.4423,
+  "ma200": 158.9692,
   "note": "Simulation only. Yahoo H1 quotes; fixed 4-sen round-trip cost, no broker fills, spread dynamics, slippage or swap. Not investment advice."
 }
