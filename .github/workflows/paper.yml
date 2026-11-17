@@ -1,0 +1,32 @@
+name: USDJPY paper trading
+on:
+  schedule:
+    # 08:00 JST Monday-Friday = 23:00 UTC Sunday-Thursday
+    - cron: '0 23 * * 0-4'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: usdjpy-paper
+  cancel-in-progress: false
+jobs:
+  paper:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python paper_trade.py
+      - name: Persist simulation state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state.json dashboard.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update USDJPY paper journal"
+            git push
+          fi
