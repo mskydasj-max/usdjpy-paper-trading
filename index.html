@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101827"><meta name="apple-mobile-web-app-capable" content="yes"><title>ドル円 仮想売買</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;color:#e9eef9;background:#0d1422}body{margin:0;padding:24px 18px 60px;max-width:600px;margin:auto}h1{font-size:24px;margin:8px 0 4px}p,small{color:#a6b3ca}header{margin-bottom:28px}.tag{font-size:12px;background:#22334a;padding:6px 10px;border-radius:20px;color:#9fd5ff}.card{background:#18243a;border:1px solid #2b3a53;border-radius:18px;padding:20px;margin:12px 0}.amount{font-size:40px;font-weight:750;letter-spacing:-1px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid .card{margin:0}.label{font-size:13px;color:#a6b3ca;margin-bottom:9px}.value{font-size:21px;font-weight:700}.negative{color:#ff9292}.positive{color:#7fe2a8}table{width:100%;font-size:12px;border-collapse:collapse}td,th{padding:12px 4px;text-align:left;border-bottom:1px solid #31415a}button{border:0;border-radius:12px;padding:12px 16px;background:#365eaa;color:white;font-weight:bold}.muted{font-size:12px;line-height:1.6}#error{color:#ffb5b5}
+</style></head><body>
+<header><span class="tag">PAPER TRADING • 実際の注文なし</span><h1>ドル円 仮想売買</h1><small id="updated">データ読み込み中...</small></header>
+<section class="card"><div class="label">仮想資金残高</div><div class="amount" id="cash">—</div><div id="pnl">累計損益 —</div></section>
+<div class="grid"><section class="card"><div class="label">USD/JPY</div><div class="value" id="price">—</div></section><section class="card"><div class="label">ポジション</div><div class="value" id="position">—</div></section><section class="card"><div class="label">終了した取引</div><div class="value" id="count">—</div></section><section class="card"><div class="label">稼働状態</div><div class="value" id="status">—</div></section></div>
+<section class="card"><h3>最近の取引</h3><div style="overflow:auto"><table><thead><tr><th>日時 (日本)</th><th>方向</th><th>損益</th></tr></thead><tbody id="trades"><tr><td colspan="3">取引なし</td></tr></tbody></table></div></section>
+<p id="error"></p><button onclick="load()">更新する</button><p class="muted">これは仮想売買の検証用画面です。価格は遅延する場合があります。取引コストは固定モデルで、実際の約定・損益を再現しません。</p>
+<script>
+const yen=n=>new Intl.NumberFormat('ja-JP',{style:'currency',currency:'JPY',maximumFractionDigits:0}).format(n);
+const jst=s=>new Date(s).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
+async function load(){try{
+const r=await fetch('dashboard.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('計算結果がまだありません');
+const d=await r.json();document.getElementById('error').textContent='';
+document.getElementById('updated').textContent='最終更新 '+jst(d.updated_at)+'（日本時間）';
+document.getElementById('cash').textContent=yen(d.cash_jpy);
+const p=document.getElementById('pnl');p.textContent='累計確定損益 '+yen(d.realized_pnl_jpy);p.className=d.realized_pnl_jpy<0?'negative':'positive';
+document.getElementById('price').textContent=d.latest_price.toFixed(3);
+document.getElementById('position').textContent=d.position?(d.position.side===1?'買い':'売り'):'なし';
+document.getElementById('count').textContent=d.trade_count+'回';
+document.getElementById('status').textContent=d.halted?'停止中':'仮想運用中';
+document.getElementById('trades').innerHTML=(d.trades||[]).slice(-10).reverse().map(t=>'<tr><td>'+jst(t.closed)+'</td><td>'+t.side+'</td><td class="'+(t.pnl_jpy<0?'negative':'positive')+'">'+yen(t.pnl_jpy)+'</td></tr>').join('')||'<tr><td colspan="3">取引なし</td></tr>';
+}catch(e){document.getElementById('error').textContent='表示できません: '+e.message+'。自動実行が成功したか確認してください。'}}
+load();
+</script></body></html>
