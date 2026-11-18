@@ -1,14 +1,24 @@
 {
-  "updated_at": "2026-11-18T23:44:43.102014+00:00",
+  "updated_at": "2026-11-18T23:54:06.000Z",
   "last_processed_bar": "2026-11-18T22:00:00+00:00",
-  "cash_jpy": 100000.0,
-  "realized_pnl_jpy": 0.0,
+  "cash_jpy": 99733.55,
+  "realized_pnl_jpy": -266.45,
   "position": null,
-  "trades": [],
-  "trade_count": 0,
+  "trades": [
+    {
+      "opened": "2026-11-18T05:00:00+00:00",
+      "closed": "2026-11-18T12:00:00+00:00",
+      "side": "SELL",
+      "entry": 159.159,
+      "exit": 159.40545398702253,
+      "pnl_jpy": -266.45,
+      "reason": "stop"
+    }
+  ],
+  "trade_count": 1,
   "halted": false,
-  "latest_price": 159.323,
-  "ma50": 159.3159,
-  "ma200": 159.1355,
-  "note": "Simulation only. Yahoo H1 quotes; fixed 4-sen round-trip cost, no broker fills, spread dynamics, slippage or swap. Not investment advice."
+  "latest_price": null,
+  "ma50": null,
+  "ma200": null,
+  "note": "Migrated from Colab Dukascopy H1 journal. Price awaits next GitHub calculation. Paper only, no real orders."
 }
