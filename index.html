@@ -17,7 +17,7 @@ const d=await r.json();document.getElementById('error').textContent='';
 document.getElementById('updated').textContent='最終更新 '+jst(d.updated_at)+'（日本時間）';
 document.getElementById('cash').textContent=yen(d.cash_jpy);
 const p=document.getElementById('pnl');p.textContent='累計確定損益 '+yen(d.realized_pnl_jpy);p.className=d.realized_pnl_jpy<0?'negative':'positive';
-document.getElementById('price').textContent=d.latest_price.toFixed(3);
+document.getElementById('price').textContent=(typeof d.latest_price==='number'?d.latest_price.toFixed(3):'更新待ち');
 document.getElementById('position').textContent=d.position?(d.position.side===1?'買い':'売り'):'なし';
 document.getElementById('count').textContent=d.trade_count+'回';
 document.getElementById('status').textContent=d.halted?'停止中':'仮想運用中';
