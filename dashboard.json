@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-18T23:54:06.000Z",
+  "updated_at": "2026-11-18T23:57:05.819952+00:00",
   "last_processed_bar": "2026-11-18T22:00:00+00:00",
   "cash_jpy": 99733.55,
   "realized_pnl_jpy": -266.45,
@@ -17,8 +17,8 @@
   ],
   "trade_count": 1,
   "halted": false,
-  "latest_price": null,
-  "ma50": null,
-  "ma200": null,
-  "note": "Migrated from Colab Dukascopy H1 journal. Price awaits next GitHub calculation. Paper only, no real orders."
+  "latest_price": 159.322,
+  "ma50": 159.3187,
+  "ma200": 159.5244,
+  "note": "Retrospective Dukascopy bid-only H1 paper simulation; 2-sen round-trip illustrative cost. No live orders, slippage or swap."
 }
