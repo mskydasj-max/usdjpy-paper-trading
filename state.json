@@ -1,10 +1,10 @@
 {
   "cash": 99733.54601297747,
   "position": null,
-  "last_bar": "2026-11-18T22:00:00+00:00",
+  "last_bar": "2026-11-19T22:00:00+00:00",
   "halted": false,
-  "day": "2026-11-18",
-  "day_start": 100000,
+  "day": "2026-11-19",
+  "day_start": 99733.54601297747,
   "blocked_day": false,
   "pending_exit": false,
   "trades": [
